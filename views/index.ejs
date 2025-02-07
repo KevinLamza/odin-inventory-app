@@ -8,9 +8,22 @@
         </h1>
         <!-- <p><a href="/new">Add a message</a></p> -->
         <% items.forEach((item) => { %>
-        <span><%= item.name %></span><br />
-        <span><%= item.type %></span><br />
-        <span><%= item.trainer %></span><br />
+        <span
+            >ID:
+            <%= item.id %></span
+        ><br />
+        <span
+            >Name:
+            <%= item.pokemon_name %></span
+        ><br />
+        <span
+            >Type:
+            <%= item.type_name %></span
+        ><br />
+        <span
+            >Trainer:
+            <%= item.trainer_name %></span
+        ><br />
         <span>----------</span><br />
         <% }); %>
     </body>

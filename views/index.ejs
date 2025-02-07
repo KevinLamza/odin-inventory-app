@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <!-- placeholder -->
+    </head>
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+        <!-- <p><a href="/new">Add a message</a></p> -->
+        <% items.forEach((item) => { %>
+        <span><%= item.name %></span><br />
+        <span><%= item.type %></span><br />
+        <span><%= item.trainer %></span><br />
+        <span>----------</span><br />
+        <% }); %>
+    </body>
+</html>

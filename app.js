@@ -2,7 +2,6 @@ import 'dotenv/config';
 import express from 'express';
 import path from 'path';
 import indexRouter from './routes/indexRouter.js';
-import newRouter from './routes/newRouter.js';
 
 const __dirname = new URL('.', import.meta.url).pathname;
 
@@ -23,4 +22,3 @@ app.listen(PORT, () => {
 });
 
 app.use('/', indexRouter);
-app.use('/new', newRouter);

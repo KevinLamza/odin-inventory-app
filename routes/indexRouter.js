@@ -15,7 +15,7 @@ import * as indexController from '../controllers/indexController.js';
 
 const indexRouter = Router();
 
-indexRouter.get('/', indexController.getAllItems);
+indexRouter.get('/', indexController.getItems);
 // usersRouter.get('/new', usersController.usersCreateNewGet);
 // usersRouter.post('/new', usersController.usersCreateNewPost);
 // usersRouter.get('/delete', usersController.usersDeleteAll);

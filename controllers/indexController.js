@@ -10,12 +10,18 @@ import * as db from '../db/queries.js';
 //         .withMessage('Must be between 1 and 20 characters!'),
 // ];
 
-export const getAllItems = async (req, res) => {
-    const items = await db.getAllItems();
+export const getItems = async (req, res) => {
+    console.log(`search query: ${req.query.type}`);
+    const items =
+        Object.keys(req.query).length !== 0
+            ? await db.getFilteredItems(req.query.type)
+            : await db.getAllItems();
     const types = await db.getAllTypes();
-    // res.send('Usernames: ' + usernames.map((user) => user.username).join(', '));
-    // console.log('Usernames: ', usernames);
-    res.render('index', { title: 'Inventory App', items: items, types: types });
+    res.render('index', {
+        title: 'Inventory App',
+        items: items,
+        types: types,
+    });
 };
 
 // export const usersCreateNewGet = (req, res) => {

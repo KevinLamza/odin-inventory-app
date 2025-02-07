@@ -14,7 +14,12 @@
                 <option value="fiat">Fiat</option>
                 <option value="audi">Audi</option> -->
                 <% types.forEach((type) => { %>
-                <option value="<%= type.name %>"><%= type.name %></option>
+                    <option 
+                    value="<%= type.name %>" 
+                    <%= items[0].type_name === type.name ? 'selected="selected"' : '' %>>
+                    <%= type.name %>
+                </option>
+                
                 <% }); %>
             </select>
             <button type="submit">Submit</button>

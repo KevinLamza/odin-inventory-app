@@ -9,6 +9,13 @@ export async function getAllItems() {
     return rows;
 }
 
+export async function getAllTypes() {
+    // const { rows } = await pool.query('SELECT * FROM pokemon');
+    const { rows } = await pool.query('SELECT name FROM type;');
+    console.log(rows);
+    return rows;
+}
+
 // export async function postAddMessage(message, username) {
 //     await pool.query(
 //         'INSERT INTO messages (message, username, created_at) VALUES ($1, $2, $3)',

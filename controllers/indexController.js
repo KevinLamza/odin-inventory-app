@@ -12,9 +12,10 @@ import * as db from '../db/queries.js';
 
 export const getAllItems = async (req, res) => {
     const items = await db.getAllItems();
+    const types = await db.getAllTypes();
     // res.send('Usernames: ' + usernames.map((user) => user.username).join(', '));
     // console.log('Usernames: ', usernames);
-    res.render('index', { title: 'Inventory App', items: items });
+    res.render('index', { title: 'Inventory App', items: items, types: types });
 };
 
 // export const usersCreateNewGet = (req, res) => {

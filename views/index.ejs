@@ -13,13 +13,17 @@
                 <option value="saab">Saab</option>
                 <option value="fiat">Fiat</option>
                 <option value="audi">Audi</option> -->
+                <option 
+                value='All' 
+                <%= filter === 'All' ? 'selected="selected"' : '' %>>
+                All
+                </option>
                 <% types.forEach((type) => { %>
                     <option 
                     value="<%= type.name %>" 
-                    <%= items[0].type_name === type.name ? 'selected="selected"' : '' %>>
+                    <%= filter === type.name ? 'selected="selected"' : '' %>>
                     <%= type.name %>
                 </option>
-                
                 <% }); %>
             </select>
             <button type="submit">Submit</button>

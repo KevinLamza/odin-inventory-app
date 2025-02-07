@@ -13,7 +13,7 @@ import * as db from '../db/queries.js';
 export const getItems = async (req, res) => {
     console.log(`search query: ${req.query.type}`);
     const items =
-        Object.keys(req.query).length !== 0
+        Object.keys(req.query).length !== 0 && req.query.type !== 'All'
             ? await db.getFilteredItems(req.query.type)
             : await db.getAllItems();
     const types = await db.getAllTypes();
@@ -21,6 +21,7 @@ export const getItems = async (req, res) => {
         title: 'Inventory App',
         items: items,
         types: types,
+        filter: req.query.type,
     });
 };
 

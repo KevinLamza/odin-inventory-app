@@ -1,0 +1,20 @@
+{
+    "type": "module",
+    "devDependencies": {
+        "@babel/core": "^7.26.0",
+        "@babel/preset-env": "^7.26.0",
+        "@eslint/js": "^9.13.0",
+        "eslint": "^9.13.0",
+        "globals": "^15.11.0",
+        "prettier": "^3.3.3",
+        "prettier-plugin-ejs": "^1.0.3"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.7",
+        "ejs": "^3.1.10",
+        "express": "^4.21.2",
+        "express-async-handler": "^1.2.0",
+        "express-validator": "^7.2.1",
+        "pg": "^8.13.1"
+    }
+}

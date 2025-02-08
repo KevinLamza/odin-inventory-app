@@ -82,6 +82,16 @@ export const postCreateTrainer = async (req, res) => {
     res.redirect('/');
 };
 
+export const getCreatePokemon = async (req, res) => {
+    const types = await db.getAllTypes();
+    const trainers = await db.getAllTrainers();
+    res.render('createPokemon', {
+        title: 'Create new Pokemon',
+        trainers: trainers,
+        types: types,
+    });
+};
+
 // export const usersCreateNewGet = (req, res) => {
 //     res.render('new', {
 //         title: 'Create user',

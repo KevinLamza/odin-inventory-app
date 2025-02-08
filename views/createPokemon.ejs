@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <!-- placeholder -->
+    </head>
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+        <form method="POST" action="/createPokemon">
+            <label for="name">Name:</label><br />
+            <input type="text" id="name" name="name" /><br /><br />
+            <label for="type">Choose a type:</label>
+            <select id="type" name="type">
+                <% types.forEach((type) => { %>
+                <option value="<%= type.name %>"><%= type.name %></option>
+                <% }); %></select
+            ><br />
+            <label for="trainers">Choose a trainer:</label>
+            <select id="trainers" name="trainers">
+                <% trainers.forEach((trainer) => { %>
+                <option value="<%= trainer.name %>"><%= trainer.name %></option>
+                <% }); %></select
+            ><br /><br />
+            <input type="submit" value="Submit" />
+        </form>
+    </body>
+</html>

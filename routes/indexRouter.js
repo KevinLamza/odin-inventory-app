@@ -21,5 +21,6 @@ indexRouter.post('/createType', indexController.postCreateType);
 indexRouter.get('/createTrainer', indexController.getCreateTrainer);
 indexRouter.post('/createTrainer', indexController.postCreateTrainer);
 indexRouter.get('/createPokemon', indexController.getCreatePokemon);
+indexRouter.post('/createPokemon', indexController.postCreatePokemon);
 
 export default indexRouter;

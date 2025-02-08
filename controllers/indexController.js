@@ -92,6 +92,11 @@ export const getCreatePokemon = async (req, res) => {
     });
 };
 
+export const postCreatePokemon = async (req, res) => {
+    await db.postCreatePokemon(req.body.name, req.body.type, req.body.trainers);
+    res.redirect('/');
+};
+
 // export const usersCreateNewGet = (req, res) => {
 //     res.render('new', {
 //         title: 'Create user',

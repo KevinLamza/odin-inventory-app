@@ -95,6 +95,26 @@ export async function postCreateTrainer(trainer) {
     await pool.query('INSERT INTO trainer (name) VALUES ($1)', [trainer]);
 }
 
+export async function postCreatePokemon(name, type, trainer) {
+    const typeQuery = await pool.query(
+        `SELECT id FROM type WHERE type.name LIKE $1;`,
+        [type],
+    );
+    const typeId = typeQuery.rows.length > 0 ? typeQuery.rows[0].id : null;
+    const trainerQuery = await pool.query(
+        `SELECT id FROM trainer WHERE trainer.name LIKE $1;`,
+        [trainer],
+    );
+    const trainerId =
+        trainerQuery.rows.length > 0 ? trainerQuery.rows[0].id : null;
+    console.log(typeId);
+    console.log(trainerId);
+    await pool.query(
+        'INSERT INTO pokemon (name, type, trainer) VALUES ($1, $2, $3)',
+        [name, typeId, trainerId],
+    );
+}
+
 // export async function postAddMessage(message, username) {
 //     await pool.query(
 //         'INSERT INTO messages (message, username, created_at) VALUES ($1, $2, $3)',

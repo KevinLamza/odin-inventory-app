@@ -11,17 +11,52 @@ import * as db from '../db/queries.js';
 // ];
 
 export const getItems = async (req, res) => {
-    console.log(`search query: ${req.query.type}`);
-    const items =
-        Object.keys(req.query).length !== 0 && req.query.type !== 'All'
-            ? await db.getFilteredItems(req.query.type)
-            : await db.getAllItems();
+    console.log(`type query: ${req.query.type}`);
+    console.log(`trainer query: ${req.query.trainers}`);
+    // const items =
+    //     Object.keys(req.query).length !== 0 && req.query.type !== 'All'
+    //         ? await db.getFilteredItems(req.query.type)
+    //         : await db.getAllItems();
+    let items;
+    if (
+        Object.keys(req.query).length !== 0 &&
+        req.query.type !== 'All' &&
+        req.query.trainers !== 'All'
+    ) {
+        items = await db.getItemsFilteredByTypeAndTrainer(
+            req.query.type,
+            req.query.trainers,
+        );
+    } else if (
+        Object.keys(req.query).length !== 0 &&
+        (req.query.type === 'All' || req.query.type === 'undefined') &&
+        req.query.trainers !== 'All'
+    ) {
+        items = await db.getItemsFilteredByTrainer(req.query.trainers);
+    } else if (
+        Object.keys(req.query).length !== 0 &&
+        req.query.type !== 'All' &&
+        (req.query.trainers === 'All' || req.query.trainers === 'undefined')
+    ) {
+        items = await db.getItemsFilteredByType(req.query.type);
+    } else if (
+        Object.keys(req.query).length !== 0 &&
+        req.query.type === 'All' &&
+        req.query.trainers === 'All'
+    ) {
+        items = await db.getAllItems();
+    } else {
+        items = await db.getAllItems();
+    }
     const types = await db.getAllTypes();
+    const trainers = await db.getAllTrainers();
     res.render('index', {
         title: 'Inventory App',
         items: items,
         types: types,
-        filter: req.query.type,
+        trainers: trainers,
+        typeFilter: req.query.type,
+        trainerFilter: req.query.trainers,
     });
 };
 

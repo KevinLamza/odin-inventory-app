@@ -15,14 +15,33 @@
                 <option value="audi">Audi</option> -->
                 <option 
                 value='All' 
-                <%= filter === 'All' ? 'selected="selected"' : '' %>>
+                <%= typeFilter === 'All' ? 'selected="selected"' : '' %>>
                 All
                 </option>
                 <% types.forEach((type) => { %>
                     <option 
                     value="<%= type.name %>" 
-                    <%= filter === type.name ? 'selected="selected"' : '' %>>
+                    <%= typeFilter === type.name ? 'selected="selected"' : '' %>>
                     <%= type.name %>
+                </option>
+                <% }); %>
+            </select>
+            <label for="trainers">Choose a trainer:</label>
+            <select id="trainers" name="trainers">
+                <!-- <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option> -->
+                <option 
+                value='All' 
+                <%= trainerFilter === 'All' ? 'selected="selected"' : '' %>>
+                All
+                </option>
+                <% trainers.forEach((trainer) => { %>
+                    <option 
+                    value="<%= trainer.name %>" 
+                    <%= trainerFilter === trainer.name ? 'selected="selected"' : '' %>>
+                    <%= trainer.name %>
                 </option>
                 <% }); %>
             </select>

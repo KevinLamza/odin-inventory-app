@@ -17,7 +17,7 @@ export async function getAllItems() {
     return rows;
 }
 
-export async function getFilteredItems(string) {
+export async function getItemsFilteredByType(string) {
     const { rows } = await pool.query(
         `SELECT 
             pokemon.id, 
@@ -35,9 +35,55 @@ export async function getFilteredItems(string) {
     return rows;
 }
 
+export async function getItemsFilteredByTrainer(string) {
+    const { rows } = await pool.query(
+        `SELECT 
+            pokemon.id, 
+            pokemon.name AS pokemon_name, 
+            type.name AS type_name, 
+            trainer.name AS trainer_name 
+        FROM 
+            pokemon 
+        LEFT JOIN type 
+            ON pokemon.type = type.id 
+        LEFT JOIN trainer 
+            ON pokemon.trainer = trainer.id 
+        WHERE trainer.name LIKE '${string}';`,
+    );
+    return rows;
+}
+
+export async function getItemsFilteredByTypeAndTrainer(
+    typeString,
+    trainerString,
+) {
+    const { rows } = await pool.query(
+        `SELECT 
+            pokemon.id, 
+            pokemon.name AS pokemon_name, 
+            type.name AS type_name, 
+            trainer.name AS trainer_name 
+        FROM 
+            pokemon 
+        LEFT JOIN type 
+            ON pokemon.type = type.id 
+        LEFT JOIN trainer 
+            ON pokemon.trainer = trainer.id 
+        WHERE type.name LIKE '${typeString}'
+        AND trainer.name LIKE '${trainerString}';`,
+    );
+    return rows;
+}
+
 export async function getAllTypes() {
     // const { rows } = await pool.query('SELECT * FROM pokemon');
     const { rows } = await pool.query('SELECT name FROM type;');
+    return rows;
+}
+
+export async function getAllTrainers() {
+    // const { rows } = await pool.query('SELECT * FROM pokemon');
+    const { rows } = await pool.query('SELECT name FROM trainer;');
     return rows;
 }
 

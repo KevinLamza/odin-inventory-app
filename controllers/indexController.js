@@ -60,6 +60,18 @@ export const getItems = async (req, res) => {
     });
 };
 
+export const getCreateType = (req, res) => {
+    res.render('createType', {
+        title: 'Create new type',
+    });
+};
+
+export const getCreateTrainer = (req, res) => {
+    res.render('createTrainer', {
+        title: 'Create new trainer',
+    });
+};
+
 // export const usersCreateNewGet = (req, res) => {
 //     res.render('new', {
 //         title: 'Create user',

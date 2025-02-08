@@ -30,7 +30,8 @@ export async function getItemsFilteredByType(string) {
             ON pokemon.type = type.id 
         LEFT JOIN trainer 
             ON pokemon.trainer = trainer.id 
-        WHERE type.name LIKE '${string}';`,
+        WHERE type.name = $1;`,
+        [string],
     );
     return rows;
 }
@@ -48,7 +49,8 @@ export async function getItemsFilteredByTrainer(string) {
             ON pokemon.type = type.id 
         LEFT JOIN trainer 
             ON pokemon.trainer = trainer.id 
-        WHERE trainer.name LIKE '${string}';`,
+        WHERE trainer.name = $1;`,
+        [string],
     );
     return rows;
 }
@@ -69,8 +71,9 @@ export async function getItemsFilteredByTypeAndTrainer(
             ON pokemon.type = type.id 
         LEFT JOIN trainer 
             ON pokemon.trainer = trainer.id 
-        WHERE type.name LIKE '${typeString}'
-        AND trainer.name LIKE '${trainerString}';`,
+        WHERE type.name = $1
+        AND trainer.name = $2;`,
+        [typeString, trainerString], // Exact match parameters
     );
     return rows;
 }
@@ -114,10 +117,3 @@ export async function postCreatePokemon(name, type, trainer) {
         [name, typeId, trainerId],
     );
 }
-
-// export async function postAddMessage(message, username) {
-//     await pool.query(
-//         'INSERT INTO messages (message, username, created_at) VALUES ($1, $2, $3)',
-//         [message, username, 'NOW()'],
-//     );
-// }

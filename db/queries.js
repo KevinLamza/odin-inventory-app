@@ -87,6 +87,14 @@ export async function getAllTrainers() {
     return rows;
 }
 
+export async function postCreateType(type) {
+    await pool.query('INSERT INTO type (name) VALUES ($1)', [type]);
+}
+
+export async function postCreateTrainer(trainer) {
+    await pool.query('INSERT INTO trainer (name) VALUES ($1)', [trainer]);
+}
+
 // export async function postAddMessage(message, username) {
 //     await pool.query(
 //         'INSERT INTO messages (message, username, created_at) VALUES ($1, $2, $3)',

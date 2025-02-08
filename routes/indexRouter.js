@@ -17,9 +17,8 @@ const indexRouter = Router();
 
 indexRouter.get('/', indexController.getItems);
 indexRouter.get('/createType', indexController.getCreateType);
+indexRouter.post('/createType', indexController.postCreateType);
 indexRouter.get('/createTrainer', indexController.getCreateTrainer);
-// usersRouter.get('/new', usersController.usersCreateNewGet);
-// usersRouter.post('/new', usersController.usersCreateNewPost);
-// usersRouter.get('/delete', usersController.usersDeleteAll);
+indexRouter.post('/createTrainer', indexController.postCreateTrainer);
 
 export default indexRouter;

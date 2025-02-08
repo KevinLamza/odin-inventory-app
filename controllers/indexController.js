@@ -11,8 +11,8 @@ import * as db from '../db/queries.js';
 // ];
 
 export const getItems = async (req, res) => {
-    console.log(`type query: ${req.query.type}`);
-    console.log(`trainer query: ${req.query.trainers}`);
+    // console.log(`type query: ${req.query.type}`);
+    // console.log(`trainer query: ${req.query.trainers}`);
     // const items =
     //     Object.keys(req.query).length !== 0 && req.query.type !== 'All'
     //         ? await db.getFilteredItems(req.query.type)
@@ -66,10 +66,20 @@ export const getCreateType = (req, res) => {
     });
 };
 
+export const postCreateType = async (req, res) => {
+    await db.postCreateType(req.body.name);
+    res.redirect('/');
+};
+
 export const getCreateTrainer = (req, res) => {
     res.render('createTrainer', {
         title: 'Create new trainer',
     });
+};
+
+export const postCreateTrainer = async (req, res) => {
+    await db.postCreateTrainer(req.body.name);
+    res.redirect('/');
 };
 
 // export const usersCreateNewGet = (req, res) => {

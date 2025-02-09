@@ -11,12 +11,6 @@ const validateName = [
 ];
 
 export const getItems = async (req, res) => {
-    // console.log(`type query: ${req.query.type}`);
-    // console.log(`trainer query: ${req.query.trainers}`);
-    // const items =
-    //     Object.keys(req.query).length !== 0 && req.query.type !== 'All'
-    //         ? await db.getFilteredItems(req.query.type)
-    //         : await db.getAllItems();
     let items;
     if (
         Object.keys(req.query).length !== 0 &&
@@ -164,12 +158,6 @@ export const postUpdateTypes = [
                 await db.postUpdateType(prop, req.body[prop]);
             }
         }
-        // await db.postUpdateTypes(
-        //     req.body.name,
-        //     req.body.type,
-        //     req.body.trainers,
-        // );
-        // console.log(req.body);
         res.redirect('/');
     },
 ];
@@ -203,12 +191,6 @@ export const postUpdateTrainer = [
                 await db.postUpdateTrainer(prop, req.body[prop]);
             }
         }
-        // await db.postUpdateTypes(
-        //     req.body.name,
-        //     req.body.type,
-        //     req.body.trainers,
-        // );
-        // console.log(req.body);
         res.redirect('/');
     },
 ];
@@ -236,24 +218,16 @@ export const postUpdatePokemon = [
                 errors: errors.array(),
             });
         }
-        // It's an object, with the key being the name of the form field and the value the value of the input
         for (let prop in req.body) {
             if (!req.body.hasOwnProperty(prop)) {
                 continue;
             }
             const split = prop.split('_');
             if (req.body[prop] !== split[2]) {
-                // await db.postUpdateTrainer(prop, req.body[prop]);
-                // console.log(req.body[prop]);
-                // console.log(split[2]);
-                // console.log('hi');
                 if (split[0] === 'Name') {
-                    // console.log(split[1]);
-                    // console.log(req.body[prop]);
                     await db.postUpdatePokemonName(split[1], req.body[prop]);
                 } else if (split[0] === 'Type') {
                     const newTypeId = await db.getTypeId(req.body[prop]);
-                    // console.log(newTypeId[0].id);
                     await db.postUpdatePokemonType(split[1], newTypeId[0].id);
                 } else if (split[0] === 'Trainer') {
                     const newTrainerId = await db.getTrainerId(req.body[prop]);

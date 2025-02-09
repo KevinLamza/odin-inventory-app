@@ -1,7 +1,6 @@
 import pool from './pool.js';
 
 export async function getAllItems() {
-    // const { rows } = await pool.query('SELECT * FROM pokemon');
     const { rows } = await pool.query(
         `SELECT 
             pokemon.id, 
@@ -79,13 +78,11 @@ export async function getItemsFilteredByTypeAndTrainer(
 }
 
 export async function getAllTypes() {
-    // const { rows } = await pool.query('SELECT * FROM pokemon');
     const { rows } = await pool.query('SELECT name FROM type;');
     return rows;
 }
 
 export async function getAllTrainers() {
-    // const { rows } = await pool.query('SELECT * FROM pokemon');
     const { rows } = await pool.query('SELECT name FROM trainer;');
     return rows;
 }

@@ -212,3 +212,58 @@ export const postUpdateTrainer = [
         res.redirect('/');
     },
 ];
+
+export const getUpdatePokemon = async (req, res) => {
+    const items = await db.getAllItems();
+    const types = await db.getAllTypes();
+    const trainers = await db.getAllTrainers();
+    res.render('updatePokemon', {
+        title: 'Update Pokemon',
+        items: items,
+        types: types,
+        trainers: trainers,
+    });
+};
+
+export const postUpdatePokemon = [
+    validateName,
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).render('createPokemon', {
+                title: 'Update types',
+                types: types,
+                errors: errors.array(),
+            });
+        }
+        // It's an object, with the key being the name of the form field and the value the value of the input
+        for (let prop in req.body) {
+            if (!req.body.hasOwnProperty(prop)) {
+                continue;
+            }
+            const split = prop.split('_');
+            if (req.body[prop] !== split[2]) {
+                // await db.postUpdateTrainer(prop, req.body[prop]);
+                // console.log(req.body[prop]);
+                // console.log(split[2]);
+                // console.log('hi');
+                if (split[0] === 'Name') {
+                    // console.log(split[1]);
+                    // console.log(req.body[prop]);
+                    await db.postUpdatePokemonName(split[1], req.body[prop]);
+                } else if (split[0] === 'Type') {
+                    const newTypeId = await db.getTypeId(req.body[prop]);
+                    // console.log(newTypeId[0].id);
+                    await db.postUpdatePokemonType(split[1], newTypeId[0].id);
+                } else if (split[0] === 'Trainer') {
+                    const newTrainerId = await db.getTrainerId(req.body[prop]);
+                    await db.postUpdatePokemonTrainer(
+                        split[1],
+                        newTrainerId[0].id,
+                    );
+                }
+            }
+        }
+        res.redirect('/');
+    },
+];

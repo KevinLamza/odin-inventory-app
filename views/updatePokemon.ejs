@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <!-- placeholder -->
+    </head>
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+        <a href="/">Return to homepage</a><br />
+        <%- include("partials/errors.ejs") %>
+        <br /><br />
+        <form action="/updatePokemon" method="POST">
+            <% items.forEach((item) => { %>
+                <input
+                value="<%= item.pokemon_name %>" name="Name_<%=item.id %>_<%= item.pokemon_name %>" id="<%= item.pokemon_name %>">
+                </input>
+                <select id="type" name="Type_<%=item.id %>_<%=item.type_name %>" >
+                <% types.forEach((type) => { %>
+                    <option 
+                    value="<%= type.name %>"
+                    <%= item.type_name === type.name ? 'selected="selected"' : '' %>>
+                    <%= type.name %>
+                </option>
+                <% }); %>
+                </select>
+                <select id="trainers" name="Trainer_<%=item.id %>_<%=item.trainer_name %>">
+                <% trainers.forEach((trainer) => { %>
+                    <option 
+                    value="<%= trainer.name %>" 
+                    <%= item.trainer_name === trainer.name ? 'selected="selected"' : '' %>>
+                    <%= trainer.name %>
+                </option>
+                <% }); %>
+                </select><br />
+            <% }); %>
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>

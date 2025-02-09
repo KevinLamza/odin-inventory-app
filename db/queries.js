@@ -131,3 +131,39 @@ export async function postUpdateTrainer(oldName, newName) {
         oldName,
     ]);
 }
+
+export async function postUpdatePokemonName(Id, newName) {
+    await pool.query('UPDATE pokemon SET name = $1 WHERE id = $2;', [
+        newName,
+        Id,
+    ]);
+}
+
+export async function postUpdatePokemonType(Id, newType) {
+    await pool.query('UPDATE pokemon SET type = $1 WHERE id = $2;', [
+        newType,
+        Id,
+    ]);
+}
+
+export async function postUpdatePokemonTrainer(Id, newTrainer) {
+    await pool.query('UPDATE pokemon SET trainer = $1 WHERE id = $2;', [
+        newTrainer,
+        Id,
+    ]);
+}
+
+export async function getTypeId(name) {
+    const { rows } = await pool.query('SELECT id FROM type WHERE name = $1;', [
+        name,
+    ]);
+    return rows;
+}
+
+export async function getTrainerId(name) {
+    const { rows } = await pool.query(
+        'SELECT id FROM trainer WHERE name = $1;',
+        [name],
+    );
+    return rows;
+}

@@ -117,3 +117,10 @@ export async function postCreatePokemon(name, type, trainer) {
         [name, typeId, trainerId],
     );
 }
+
+export async function postUpdateType(oldName, newName) {
+    await pool.query('UPDATE type SET name = $1 WHERE name = $2;', [
+        newName,
+        oldName,
+    ]);
+}

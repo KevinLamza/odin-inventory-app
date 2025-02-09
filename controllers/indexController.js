@@ -2,7 +2,7 @@ import { body, query, validationResult } from 'express-validator';
 import * as db from '../db/queries.js';
 
 const validateName = [
-    body('name')
+    body('*')
         .trim()
         .isAlpha()
         .withMessage('Can only contain letters')
@@ -155,12 +155,21 @@ export const postUpdateTypes = [
                 errors: errors.array(),
             });
         }
+        // It's an object, with the key being the name of the form field and the value the value of the input
+        for (let prop in req.body) {
+            if (!req.body.hasOwnProperty(prop)) {
+                continue;
+            }
+            if (req.body[prop] !== prop) {
+                await db.postUpdateType(prop, req.body[prop]);
+            }
+        }
         // await db.postUpdateTypes(
         //     req.body.name,
         //     req.body.type,
         //     req.body.trainers,
         // );
-        console.log(req.body);
+        // console.log(req.body);
         res.redirect('/');
     },
 ];

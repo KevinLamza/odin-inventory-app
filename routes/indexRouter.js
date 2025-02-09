@@ -26,5 +26,7 @@ indexRouter.post('/createPokemon', indexController.postCreatePokemon);
 
 indexRouter.get('/updateTypes', indexController.getUpdateTypes);
 indexRouter.post('/updateTypes', indexController.postUpdateTypes);
+indexRouter.get('/updateTrainer', indexController.getUpdateTrainer);
+indexRouter.post('/updateTrainer', indexController.postUpdateTrainer);
 
 export default indexRouter;

@@ -173,3 +173,42 @@ export const postUpdateTypes = [
         res.redirect('/');
     },
 ];
+
+export const getUpdateTrainer = async (req, res) => {
+    const trainers = await db.getAllTrainers();
+    res.render('updateTrainer', {
+        title: 'Update trainer',
+        trainers: trainers,
+    });
+};
+
+export const postUpdateTrainer = [
+    validateName,
+    async (req, res) => {
+        const types = await db.getAllTrainers();
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).render('createPokemon', {
+                title: 'Update types',
+                types: types,
+                errors: errors.array(),
+            });
+        }
+        // It's an object, with the key being the name of the form field and the value the value of the input
+        for (let prop in req.body) {
+            if (!req.body.hasOwnProperty(prop)) {
+                continue;
+            }
+            if (req.body[prop] !== prop) {
+                await db.postUpdateTrainer(prop, req.body[prop]);
+            }
+        }
+        // await db.postUpdateTypes(
+        //     req.body.name,
+        //     req.body.type,
+        //     req.body.trainers,
+        // );
+        // console.log(req.body);
+        res.redirect('/');
+    },
+];

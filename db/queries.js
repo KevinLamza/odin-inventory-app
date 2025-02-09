@@ -124,3 +124,10 @@ export async function postUpdateType(oldName, newName) {
         oldName,
     ]);
 }
+
+export async function postUpdateTrainer(oldName, newName) {
+    await pool.query('UPDATE trainer SET name = $1 WHERE name = $2;', [
+        newName,
+        oldName,
+    ]);
+}

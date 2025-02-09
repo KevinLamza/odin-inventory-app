@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <!-- placeholder -->
+    </head>
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+        <a href="/">Return to homepage</a><br />
+        <%- include("partials/errors.ejs") %>
+        <br /><br />
+        <form action="/updateTypes" method="POST">
+            <% types.forEach((type) => { %>
+                <input
+                value="<%= type.name %>" name="<%= type.name %>" id="<%= type.name %>">
+            </input> <br />
+            <% }); %>
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>

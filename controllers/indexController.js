@@ -2,7 +2,7 @@ import { body, query, validationResult } from 'express-validator';
 import * as db from '../db/queries.js';
 
 const validateName = [
-    body('userName')
+    body('name')
         .trim()
         .isAlpha()
         .withMessage('Can only contain letters')
@@ -131,6 +131,36 @@ export const postCreatePokemon = [
             req.body.type,
             req.body.trainers,
         );
+        res.redirect('/');
+    },
+];
+
+export const getUpdateTypes = async (req, res) => {
+    const types = await db.getAllTypes();
+    res.render('updateTypes', {
+        title: 'Update types',
+        types: types,
+    });
+};
+
+export const postUpdateTypes = [
+    validateName,
+    async (req, res) => {
+        const types = await db.getAllTypes();
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).render('createPokemon', {
+                title: 'Update types',
+                types: types,
+                errors: errors.array(),
+            });
+        }
+        // await db.postUpdateTypes(
+        //     req.body.name,
+        //     req.body.type,
+        //     req.body.trainers,
+        // );
+        console.log(req.body);
         res.redirect('/');
     },
 ];

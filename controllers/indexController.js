@@ -1,14 +1,14 @@
 import { body, query, validationResult } from 'express-validator';
 import * as db from '../db/queries.js';
 
-// const validateUser = [
-//     body('userName')
-//         .trim()
-//         .isAlphanumeric()
-//         .withMessage('Can only contain letters or numbers!')
-//         .isLength({ min: 1, max: 20 })
-//         .withMessage('Must be between 1 and 20 characters!'),
-// ];
+const validateName = [
+    body('userName')
+        .trim()
+        .isAlpha()
+        .withMessage('Can only contain letters')
+        .isLength({ min: 1, max: 20 })
+        .withMessage('Must be between 1 and 20 characters!'),
+];
 
 export const getItems = async (req, res) => {
     // console.log(`type query: ${req.query.type}`);
@@ -66,10 +66,20 @@ export const getCreateType = (req, res) => {
     });
 };
 
-export const postCreateType = async (req, res) => {
-    await db.postCreateType(req.body.name);
-    res.redirect('/');
-};
+export const postCreateType = [
+    validateName,
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).render('createType', {
+                title: 'Create new type',
+                errors: errors.array(),
+            });
+        }
+        await db.postCreateType(req.body.name);
+        res.redirect('/');
+    },
+];
 
 export const getCreateTrainer = (req, res) => {
     res.render('createTrainer', {
@@ -77,10 +87,20 @@ export const getCreateTrainer = (req, res) => {
     });
 };
 
-export const postCreateTrainer = async (req, res) => {
-    await db.postCreateTrainer(req.body.name);
-    res.redirect('/');
-};
+export const postCreateTrainer = [
+    validateName,
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).render('createTrainer', {
+                title: 'Create new trainer',
+                errors: errors.array(),
+            });
+        }
+        await db.postCreateTrainer(req.body.name);
+        res.redirect('/');
+    },
+];
 
 export const getCreatePokemon = async (req, res) => {
     const types = await db.getAllTypes();
@@ -92,35 +112,25 @@ export const getCreatePokemon = async (req, res) => {
     });
 };
 
-export const postCreatePokemon = async (req, res) => {
-    await db.postCreatePokemon(req.body.name, req.body.type, req.body.trainers);
-    res.redirect('/');
-};
-
-// export const usersCreateNewGet = (req, res) => {
-//     res.render('new', {
-//         title: 'Create user',
-//     });
-// };
-
-// export const usersCreateNewPost = [
-//     validateUser,
-//     async (req, res) => {
-//         const errors = validationResult(req);
-//         if (!errors.isEmpty()) {
-//             return res.status(400).render('new', {
-//                 title: 'Create user',
-//                 errors: errors.array(),
-//             });
-//         }
-//         // console.log('username to be saved: ', req.body.userName);
-//         const userName = req.body.userName;
-//         await db.insertUsername(userName);
-//         res.redirect('/');
-//     },
-// ];
-
-// export const usersDeleteAll = async (req, res) => {
-//     await db.postDeleteUsers();
-//     res.redirect('/');
-// };
+export const postCreatePokemon = [
+    validateName,
+    async (req, res) => {
+        const types = await db.getAllTypes();
+        const trainers = await db.getAllTrainers();
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).render('createPokemon', {
+                title: 'Create new Pokemon',
+                trainers: trainers,
+                types: types,
+                errors: errors.array(),
+            });
+        }
+        await db.postCreatePokemon(
+            req.body.name,
+            req.body.type,
+            req.body.trainers,
+        );
+        res.redirect('/');
+    },
+];

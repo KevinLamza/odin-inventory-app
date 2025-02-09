@@ -6,6 +6,8 @@
         <h1>
             <%= title %>
         </h1>
+        <a href="/">Return to homepage</a><br /><br />
+        <%- include("partials/errors.ejs") %>
         <form method="POST" action="/createTrainer">
             <label for="name">Name:</label><br />
             <input type="text" id="name" name="name" /><br /><br />

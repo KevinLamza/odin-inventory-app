@@ -7,8 +7,8 @@
             <%= title %>
         </h1>
         <a href="/createPokemon">Create new Pokemon</a> | <a href="/updatePokemon">Update Pokemon</a><br />
-        <a href="/createType">Create new type</a> | <a href="/updateTypes">Update types</a><br />
-        <a href="/createTrainer">Create new trainer</a> | <a href="/updateTrainer">Update trainers</a><br />
+        <a href="/createType">Create new type</a> | <a href="/updateTypes">Update types</a> | <a href="/deleteTypes">Delete types</a><br />
+        <a href="/createTrainer">Create new trainer</a> | <a href="/updateTrainer">Update trainers</a> | <a href="/deleteTrainer">Delete trainer</a><br />
         <br /><br />
         <form action="/" method="GET">
             <label for="type">Choose a type:</label>
@@ -29,6 +29,7 @@
                     <%= type.name %>
                 </option>
                 <% }); %>
+                <option value='Unknown'>Unknown</option>
             </select>
             <label for="trainers">Choose a trainer:</label>
             <select id="trainers" name="trainers">
@@ -48,6 +49,7 @@
                     <%= trainer.name %>
                 </option>
                 <% }); %>
+                <option value='Unknown'>Unknown</option>
             </select>
             <button type="submit">Submit</button>
         </form>

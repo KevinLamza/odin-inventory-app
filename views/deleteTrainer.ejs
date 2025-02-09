@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <!-- placeholder -->
+    </head>
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+        <a href="/">Return to homepage</a><br /><br />
+        <form method="POST" action="/deleteTrainer">
+            <p>Pick the trainer to delete:</p>
+            <% trainers.forEach((trainer) => { %>
+            <input
+                type="checkbox"
+                name="<%= trainer.name %>" /><%= trainer.name %>
+            <br />
+            <% }); %>
+            <br />
+            <input type="submit" value="Submit" />
+        </form>
+    </body>
+</html>

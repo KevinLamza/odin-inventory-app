@@ -19,4 +19,9 @@ indexRouter.post('/updateTrainer', indexController.postUpdateTrainer);
 indexRouter.get('/updatePokemon', indexController.getUpdatePokemon);
 indexRouter.post('/updatePokemon', indexController.postUpdatePokemon);
 
+indexRouter.get('/deleteTypes', indexController.getDeleteTypes);
+indexRouter.post('/deleteTypes', indexController.postDeleteTypes);
+indexRouter.get('/deleteTrainer', indexController.getDeleteTrainer);
+indexRouter.post('/deleteTrainer', indexController.postDeleteTrainer);
+
 export default indexRouter;

@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <!-- placeholder -->
+    </head>
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+        <a href="/">Return to homepage</a><br /><br />
+        <form method="POST" action="/deleteTypes">
+            <p>Pick the types to delete:</p>
+            <% types.forEach((type) => { %>
+            <input type="checkbox" name="<%= type.name %>" /><%= type.name %>
+            <br />
+            <% }); %>
+            <br />
+            <input type="submit" value="Submit" />
+        </form>
+    </body>
+</html>

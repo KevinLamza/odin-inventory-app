@@ -6,7 +6,7 @@ export async function getAllItems() {
             pokemon.id, 
             pokemon.name AS pokemon_name, 
             type.name AS type_name, 
-            trainer.name AS trainer_name 
+            trainer.name AS trainer_name
         FROM pokemon 
         LEFT JOIN type 
             ON pokemon.type = type.id 
@@ -22,7 +22,7 @@ export async function getItemsFilteredByType(string) {
             pokemon.id, 
             pokemon.name AS pokemon_name, 
             type.name AS type_name, 
-            trainer.name AS trainer_name 
+            trainer.name AS trainer_name
         FROM 
             pokemon 
         LEFT JOIN type 
@@ -62,16 +62,16 @@ export async function getItemsFilteredByTypeAndTrainer(
         `SELECT 
             pokemon.id, 
             pokemon.name AS pokemon_name, 
-            type.name AS type_name, 
-            trainer.name AS trainer_name 
+            COALESCE(type.name, 'Unknown') AS type_name, 
+            COALESCE(trainer.name, 'Unknown') AS trainer_name
         FROM 
             pokemon 
         LEFT JOIN type 
             ON pokemon.type = type.id 
         LEFT JOIN trainer 
             ON pokemon.trainer = trainer.id 
-        WHERE type.name = $1
-        AND trainer.name = $2;`,
+        WHERE (type.name = $1)
+        AND (trainer.name = $2);`,
         [typeString, trainerString], // Exact match parameters
     );
     return rows;
@@ -163,4 +163,12 @@ export async function getTrainerId(name) {
         [name],
     );
     return rows;
+}
+
+export async function postDeleteType(type) {
+    await pool.query('DELETE FROM type WHERE name = $1;', [type]);
+}
+
+export async function postDeleteTrainer(trainer) {
+    await pool.query('DELETE FROM trainer WHERE name = $1;', [trainer]);
 }

@@ -241,3 +241,39 @@ export const postUpdatePokemon = [
         res.redirect('/');
     },
 ];
+
+export const getDeleteTypes = async (req, res) => {
+    const types = await db.getAllTypes();
+    res.render('deleteTypes', {
+        title: 'Delete types',
+        types: types,
+    });
+};
+
+export const postDeleteTypes = async (req, res) => {
+    for (let prop in req.body) {
+        if (!req.body.hasOwnProperty(prop)) {
+            continue;
+        }
+        await db.postDeleteType(prop);
+    }
+    res.redirect('/');
+};
+
+export const getDeleteTrainer = async (req, res) => {
+    const trainers = await db.getAllTrainers();
+    res.render('deleteTrainer', {
+        title: 'Delete trainer',
+        trainers: trainers,
+    });
+};
+
+export const postDeleteTrainer = async (req, res) => {
+    for (let prop in req.body) {
+        if (!req.body.hasOwnProperty(prop)) {
+            continue;
+        }
+        await db.postDeleteTrainer(prop);
+    }
+    res.redirect('/');
+};

@@ -172,3 +172,7 @@ export async function postDeleteType(type) {
 export async function postDeleteTrainer(trainer) {
     await pool.query('DELETE FROM trainer WHERE name = $1;', [trainer]);
 }
+
+export async function postDeletePokemon(id) {
+    await pool.query('DELETE FROM pokemon WHERE id = $1;', [id]);
+}

@@ -277,3 +277,57 @@ export const postDeleteTrainer = async (req, res) => {
     }
     res.redirect('/');
 };
+
+export const getDeletePokemon = async (req, res) => {
+    let items;
+    if (
+        Object.keys(req.query).length !== 0 &&
+        req.query.type !== 'All' &&
+        req.query.trainers !== 'All'
+    ) {
+        items = await db.getItemsFilteredByTypeAndTrainer(
+            req.query.type,
+            req.query.trainers,
+        );
+    } else if (
+        Object.keys(req.query).length !== 0 &&
+        (req.query.type === 'All' || req.query.type === 'undefined') &&
+        req.query.trainers !== 'All'
+    ) {
+        items = await db.getItemsFilteredByTrainer(req.query.trainers);
+    } else if (
+        Object.keys(req.query).length !== 0 &&
+        req.query.type !== 'All' &&
+        (req.query.trainers === 'All' || req.query.trainers === 'undefined')
+    ) {
+        items = await db.getItemsFilteredByType(req.query.type);
+    } else if (
+        Object.keys(req.query).length !== 0 &&
+        req.query.type === 'All' &&
+        req.query.trainers === 'All'
+    ) {
+        items = await db.getAllItems();
+    } else {
+        items = await db.getAllItems();
+    }
+    const types = await db.getAllTypes();
+    const trainers = await db.getAllTrainers();
+    res.render('deletePokemon', {
+        title: 'Delete Pokemon',
+        items: items,
+        types: types,
+        trainers: trainers,
+        typeFilter: req.query.type,
+        trainerFilter: req.query.trainers,
+    });
+};
+
+export const postDeletePokemon = async (req, res) => {
+    for (let prop in req.body) {
+        if (!req.body.hasOwnProperty(prop)) {
+            continue;
+        }
+        await db.postDeletePokemon(prop);
+    }
+    res.redirect('/');
+};

@@ -23,5 +23,7 @@ indexRouter.get('/deleteTypes', indexController.getDeleteTypes);
 indexRouter.post('/deleteTypes', indexController.postDeleteTypes);
 indexRouter.get('/deleteTrainer', indexController.getDeleteTrainer);
 indexRouter.post('/deleteTrainer', indexController.postDeleteTrainer);
+indexRouter.get('/deletePokemon', indexController.getDeletePokemon);
+indexRouter.post('/deletePokemon', indexController.postDeletePokemon);
 
 export default indexRouter;

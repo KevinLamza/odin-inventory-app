@@ -6,11 +6,9 @@
         <h1>
             <%= title %>
         </h1>
-        <a href="/createPokemon">Create new Pokemon</a> | <a href="/updatePokemon">Update Pokemon</a> | <a href="/deletePokemon">Delete Pokemon</a><br />
-        <a href="/createType">Create new type</a> | <a href="/updateTypes">Update types</a> | <a href="/deleteTypes">Delete types</a><br />
-        <a href="/createTrainer">Create new trainer</a> | <a href="/updateTrainer">Update trainers</a> | <a href="/deleteTrainer">Delete trainer</a><br />
+        <a href="/">Return to homepage</a>
         <br /><br />
-        <form action="/" method="GET">
+        <form action="/deletePokemon" method="GET">
             <label for="type">Choose a type:</label>
             <select id="type" name="type">
                 <!-- <option value="volvo">Volvo</option>
@@ -54,7 +52,10 @@
             <button type="submit">Submit</button>
         </form>
         <!-- <p><a href="/new">Add a message</a></p> -->
+        <form action="/deletePokemon" method="POST">
         <% items.forEach((item) => { %>
+        <input type="checkbox" id="<%= item.id %>" name="<%= item.id %>" value="<%= item.id %>" />
+        <label for="<%= item.id %>">Delete this Pokemon</label><br />
         <span
             >ID:
             <%= item.id %></span
@@ -73,5 +74,7 @@
         ><br />
         <span>----------</span><br />
         <% }); %>
+        <input type="submit" value="Submit" />
+        </form>
     </body>
 </html>

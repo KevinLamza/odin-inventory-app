@@ -5,7 +5,7 @@ export async function getAllItems() {
         `SELECT 
             pokemon.id, 
             pokemon.name AS pokemon_name, 
-            type.name AS type_name, 
+            COALESCE(type.name, 'Unknown') AS type_name, 
             trainer.name AS trainer_name
         FROM pokemon 
         LEFT JOIN type 
@@ -21,7 +21,7 @@ export async function getItemsFilteredByType(string) {
         `SELECT 
             pokemon.id, 
             pokemon.name AS pokemon_name, 
-            type.name AS type_name, 
+            COALESCE(type.name, 'Unknown') AS type_name, 
             trainer.name AS trainer_name
         FROM 
             pokemon 
@@ -40,7 +40,7 @@ export async function getItemsFilteredByTrainer(string) {
         `SELECT 
             pokemon.id, 
             pokemon.name AS pokemon_name, 
-            type.name AS type_name, 
+            COALESCE(type.name, 'Unknown') AS type_name, 
             trainer.name AS trainer_name 
         FROM 
             pokemon 

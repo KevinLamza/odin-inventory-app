@@ -44,11 +44,11 @@ export const getItems = async (req, res) => {
     }
     const types = await db.getAllTypes();
     const filteredTypes = types.filter(
-        (type) => type.id !== 0 && type.name !== 'Unknown',
+        (type) => type.id !== 0 && type.name !== 'UnknownType',
     );
     const trainers = await db.getAllTrainers();
     const filteredTrainers = trainers.filter(
-        (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+        (trainer) => trainer.id !== 0 && trainer.name !== 'UnknownTrainer',
     );
     res.render('index', {
         title: 'Inventory App',
@@ -105,11 +105,11 @@ export const postCreateTrainer = [
 export const getCreatePokemon = async (req, res) => {
     const types = await db.getAllTypes();
     const filteredTypes = types.filter(
-        (type) => type.id !== 0 && type.name !== 'Unknown',
+        (type) => type.id !== 0 && type.name !== 'UnknownType',
     );
     const trainers = await db.getAllTrainers();
     const filteredTrainers = trainers.filter(
-        (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+        (trainer) => trainer.id !== 0 && trainer.name !== 'UnknownTrainer',
     );
     res.render('createPokemon', {
         title: 'Create new Pokemon',
@@ -144,7 +144,7 @@ export const postCreatePokemon = [
 export const getUpdateTypes = async (req, res) => {
     const types = await db.getAllTypes();
     const filteredTypes = types.filter(
-        (type) => type.id !== 0 && type.name !== 'Unknown',
+        (type) => type.id !== 0 && type.name !== 'UnknownType',
     );
     res.render('updateTypes', {
         title: 'Update types',
@@ -157,7 +157,7 @@ export const postUpdateTypes = [
     async (req, res) => {
         const types = await db.getAllTypes();
         const filteredTypes = types.filter(
-            (type) => type.id !== 0 && type.name !== 'Unknown',
+            (type) => type.id !== 0 && type.name !== 'UnknownType',
         );
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -183,7 +183,7 @@ export const postUpdateTypes = [
 export const getUpdateTrainer = async (req, res) => {
     const trainers = await db.getAllTrainers();
     const filteredTrainers = trainers.filter(
-        (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+        (trainer) => trainer.id !== 0 && trainer.name !== 'UnknownTrainer',
     );
     res.render('updateTrainer', {
         title: 'Update trainer',
@@ -196,7 +196,7 @@ export const postUpdateTrainer = [
     async (req, res) => {
         const trainers = await db.getAllTrainers();
         const filteredTrainers = trainers.filter(
-            (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+            (trainer) => trainer.id !== 0 && trainer.name !== 'UnknownTrainer',
         );
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -223,11 +223,11 @@ export const getUpdatePokemon = async (req, res) => {
     const items = await db.getAllItems();
     const types = await db.getAllTypes();
     const filteredTypes = types.filter(
-        (type) => type.id !== 0 && type.name !== 'Unknown',
+        (type) => type.id !== 0 && type.name !== 'UnknownType',
     );
     const trainers = await db.getAllTrainers();
     const filteredTrainers = trainers.filter(
-        (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+        (trainer) => trainer.id !== 0 && trainer.name !== 'UnknownTrainer',
     );
     res.render('updatePokemon', {
         title: 'Update Pokemon',
@@ -275,7 +275,7 @@ export const postUpdatePokemon = [
 export const getDeleteTypes = async (req, res) => {
     const types = await db.getAllTypes();
     const filteredTypes = types.filter(
-        (type) => type.id !== 0 && type.name !== 'Unknown',
+        (type) => type.id !== 0 && type.name !== 'UnknownType',
     );
     res.render('deleteTypes', {
         title: 'Delete types',
@@ -296,7 +296,7 @@ export const postDeleteTypes = async (req, res) => {
 export const getDeleteTrainer = async (req, res) => {
     const trainers = await db.getAllTrainers();
     const filteredTrainers = trainers.filter(
-        (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+        (trainer) => trainer.id !== 0 && trainer.name !== 'UnknownTrainer',
     );
     res.render('deleteTrainer', {
         title: 'Delete trainer',
@@ -348,11 +348,11 @@ export const getDeletePokemon = async (req, res) => {
     }
     const types = await db.getAllTypes();
     const filteredTypes = types.filter(
-        (type) => type.id !== 0 && type.name !== 'Unknown',
+        (type) => type.id !== 0 && type.name !== 'UnknownType',
     );
     const trainers = await db.getAllTrainers();
     const filteredTrainers = trainers.filter(
-        (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+        (trainer) => trainer.id !== 0 && trainer.name !== 'UnknownTrainer',
     );
     res.render('deletePokemon', {
         title: 'Delete Pokemon',

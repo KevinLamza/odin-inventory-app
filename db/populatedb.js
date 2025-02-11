@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS trainer (
   name VARCHAR ( 255 )
 );
 
-INSERT INTO trainer (id, name) VALUES (0, 'Unknown')
+INSERT INTO trainer (id, name) VALUES (0, 'UnknownTrainer')
 ON CONFLICT (id) DO NOTHING;
 
 CREATE TABLE IF NOT EXISTS type (
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS type (
   name VARCHAR ( 255 )
 );
 
-INSERT INTO type (id, name) VALUES (0, 'Unknown')
+INSERT INTO type (id, name) VALUES (0, 'UnknownType')
 ON CONFLICT (id) DO NOTHING;
 
 CREATE TABLE IF NOT EXISTS pokemon (

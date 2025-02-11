@@ -29,8 +29,8 @@
                     <%= type.name %>
                 </option>
                 <% }); %>
-                <option value='Unknown'
-                <%= typeFilter === 'Unknown' ? 'selected="selected"' : '' %>>Unknown</option>
+                <option value='UnknownType'
+                <%= typeFilter === 'UnknownType' ? 'selected="selected"' : '' %>>Unknown</option>
             </select>
             <label for="trainers">Choose a trainer:</label>
             <select id="trainers" name="trainers">
@@ -50,8 +50,8 @@
                     <%= trainer.name %>
                 </option>
                 <% }); %>
-                <option value='Unknown'
-                <%= typeFilter === 'Unknown' ? 'selected="selected"' : '' %>>Unknown</option>
+                <option value='UnknownTrainer'
+                <%= typeFilter === 'UnknownTrainer' ? 'selected="selected"' : '' %>>Unknown</option>
             </select>
             <button type="submit">Submit</button>
         </form>

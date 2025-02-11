@@ -22,8 +22,11 @@ CREATE TABLE IF NOT EXISTS pokemon (
 );
 
 DELETE FROM trainer;
+ALTER SEQUENCE trainer_id_seq RESTART WITH 1;
 DELETE FROM type;
+ALTER SEQUENCE type_id_seq RESTART WITH 1;
 DELETE FROM pokemon;
+ALTER SEQUENCE pokemon_id_seq RESTART WITH 1;
 
 INSERT INTO trainer (name) 
 VALUES

@@ -43,12 +43,18 @@ export const getItems = async (req, res) => {
         items = await db.getAllItems();
     }
     const types = await db.getAllTypes();
+    const filteredTypes = types.filter(
+        (type) => type.id !== 0 && type.name !== 'Unknown',
+    );
     const trainers = await db.getAllTrainers();
+    const filteredTrainers = trainers.filter(
+        (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+    );
     res.render('index', {
         title: 'Inventory App',
         items: items,
-        types: types,
-        trainers: trainers,
+        types: filteredTypes,
+        trainers: filteredTrainers,
         typeFilter: req.query.type,
         trainerFilter: req.query.trainers,
     });
@@ -98,11 +104,17 @@ export const postCreateTrainer = [
 
 export const getCreatePokemon = async (req, res) => {
     const types = await db.getAllTypes();
+    const filteredTypes = types.filter(
+        (type) => type.id !== 0 && type.name !== 'Unknown',
+    );
     const trainers = await db.getAllTrainers();
+    const filteredTrainers = trainers.filter(
+        (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+    );
     res.render('createPokemon', {
         title: 'Create new Pokemon',
-        trainers: trainers,
-        types: types,
+        trainers: filteredTrainers,
+        types: filteredTypes,
     });
 };
 
@@ -131,9 +143,12 @@ export const postCreatePokemon = [
 
 export const getUpdateTypes = async (req, res) => {
     const types = await db.getAllTypes();
+    const filteredTypes = types.filter(
+        (type) => type.id !== 0 && type.name !== 'Unknown',
+    );
     res.render('updateTypes', {
         title: 'Update types',
-        types: types,
+        types: filteredTypes,
     });
 };
 
@@ -141,11 +156,14 @@ export const postUpdateTypes = [
     validateName,
     async (req, res) => {
         const types = await db.getAllTypes();
+        const filteredTypes = types.filter(
+            (type) => type.id !== 0 && type.name !== 'Unknown',
+        );
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).render('createPokemon', {
                 title: 'Update types',
-                types: types,
+                types: filteredTypes,
                 errors: errors.array(),
             });
         }
@@ -164,21 +182,27 @@ export const postUpdateTypes = [
 
 export const getUpdateTrainer = async (req, res) => {
     const trainers = await db.getAllTrainers();
+    const filteredTrainers = trainers.filter(
+        (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+    );
     res.render('updateTrainer', {
         title: 'Update trainer',
-        trainers: trainers,
+        trainers: filteredTrainers,
     });
 };
 
 export const postUpdateTrainer = [
     validateName,
     async (req, res) => {
-        const types = await db.getAllTrainers();
+        const trainers = await db.getAllTrainers();
+        const filteredTrainers = trainers.filter(
+            (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+        );
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).render('createPokemon', {
-                title: 'Update types',
-                types: types,
+                title: 'Update trainers',
+                trainers: filteredTrainers,
                 errors: errors.array(),
             });
         }
@@ -198,12 +222,18 @@ export const postUpdateTrainer = [
 export const getUpdatePokemon = async (req, res) => {
     const items = await db.getAllItems();
     const types = await db.getAllTypes();
+    const filteredTypes = types.filter(
+        (type) => type.id !== 0 && type.name !== 'Unknown',
+    );
     const trainers = await db.getAllTrainers();
+    const filteredTrainers = trainers.filter(
+        (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+    );
     res.render('updatePokemon', {
         title: 'Update Pokemon',
         items: items,
-        types: types,
-        trainers: trainers,
+        types: filteredTypes,
+        trainers: filteredTrainers,
     });
 };
 
@@ -244,9 +274,12 @@ export const postUpdatePokemon = [
 
 export const getDeleteTypes = async (req, res) => {
     const types = await db.getAllTypes();
+    const filteredTypes = types.filter(
+        (type) => type.id !== 0 && type.name !== 'Unknown',
+    );
     res.render('deleteTypes', {
         title: 'Delete types',
-        types: types,
+        types: filteredTypes,
     });
 };
 
@@ -262,9 +295,12 @@ export const postDeleteTypes = async (req, res) => {
 
 export const getDeleteTrainer = async (req, res) => {
     const trainers = await db.getAllTrainers();
+    const filteredTrainers = trainers.filter(
+        (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+    );
     res.render('deleteTrainer', {
         title: 'Delete trainer',
-        trainers: trainers,
+        trainers: filteredTrainers,
     });
 };
 
@@ -311,12 +347,18 @@ export const getDeletePokemon = async (req, res) => {
         items = await db.getAllItems();
     }
     const types = await db.getAllTypes();
+    const filteredTypes = types.filter(
+        (type) => type.id !== 0 && type.name !== 'Unknown',
+    );
     const trainers = await db.getAllTrainers();
+    const filteredTrainers = trainers.filter(
+        (trainer) => trainer.id !== 0 && trainer.name !== 'Unknown',
+    );
     res.render('deletePokemon', {
         title: 'Delete Pokemon',
         items: items,
-        types: types,
-        trainers: trainers,
+        types: filteredTypes,
+        trainers: filteredTrainers,
         typeFilter: req.query.type,
         trainerFilter: req.query.trainers,
     });
